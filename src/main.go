@@ -1,10 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
+	fmt.Println("Enter ListenBrainz ID: ")
+	var id string
+	fmt.Scanln(&id)
 	YTJsons := ReadYTJson("music-history.json")
-	for i := 0; i < len(YTJsons); i++ {
-		fmt.Println(YTJsons[i].Header)
-	}
+	listen := ConvertToListenBrainz(YTJsons, "music-uploads-metadata.csv")
+	SendToListenBrainz(listen, id)
 }
